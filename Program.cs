@@ -48,7 +48,7 @@ Print2DArray(myArray);
 5 9 2 3
 8 4 2 4
 17 -> такого числа в массиве нет
-*/
+
 int InputNum(string message)
 {
     Console.Write(message);
@@ -96,3 +96,61 @@ int[,] myArray = Create2DArray(rows, columns);
 Fill2DArray(myArray, minValue, maxValue);
 Print2DArray(myArray);
 NuminPos(rowi, colj, myArray );
+Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+*/
+int InputNum(string message)
+{
+    Console.Write(message);
+    return int.Parse(Console.ReadLine()!);
+}
+
+int[,] Create2DArray(int rows, int cols)
+{
+    return new int[rows, cols];
+}
+void Fill2DArray(int[,] array, int min, int max)
+{
+    Random rnd = new Random();
+    for (int i = 0; i < array.GetLength(0); i++)
+        for (int j = 0; j < array.GetLength(1); j++)
+            array[i, j] = rnd.Next(min, max + 1);
+}
+
+void Print2DArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write($"{array[i, j]}\t");
+        Console.WriteLine();
+    }
+}
+void AvCol(int[,] myArray)
+{
+for (int j = 0; j < myArray.GetLength(1); j++)
+{double sum = 0;
+double aver = 0;
+    for (int i = 0; i < myArray.GetLength(0); i++)
+    {
+        sum = sum + myArray[i,j];
+}
+   
+    aver = Math.Round(sum/myArray.GetLength(0), 2);
+    Console.Write($"{aver}  ");
+}
+}
+int rows = InputNum("Введите количество строк: ");
+int columns = InputNum("Введите количество столбцов: ");
+int minValue = InputNum("Введите минимальное значение диапазона: ");
+int maxValue = InputNum("Введите максимальное значение диапазона: ");
+
+int[,] myArray = Create2DArray(rows, columns);
+Fill2DArray(myArray, minValue, maxValue);
+Print2DArray(myArray);
+AvCol(myArray);
